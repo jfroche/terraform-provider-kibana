@@ -399,10 +399,13 @@
 			"revisionTime": "2017-01-27T09:51:30Z"
 		},
 		{
-			"checksumSHA1": "nPkPT4XrRKRFBrkXq2g1r55tdn0=",
+			"checksumSHA1": "Eu1l5nsJquTGL80727ckIkJ2KwI=",
+			"origin": "github.com/jfroche/go-kibana",
 			"path": "github.com/ewilde/go-kibana",
-			"revision": "4cdb9115bcd151d84dac706658e3cf332e1f5fc8",
-			"revisionTime": "2019-09-04T18:49:14Z"
+			"revision": "a8cec6cc3049cc8d28f5a508a01fc8da40ac8821",
+			"revisionTime": "2019-10-08T15:55:51Z",
+			"version": "feature/roles",
+			"versionExact": "feature/roles"
 		},
 		{
 			"checksumSHA1": "2iG1OyYDGax71qsun0zBSdcFt4E=",
