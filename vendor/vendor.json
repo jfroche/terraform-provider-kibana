@@ -404,8 +404,8 @@
 			"path": "github.com/ewilde/go-kibana",
 			"revision": "a8cec6cc3049cc8d28f5a508a01fc8da40ac8821",
 			"revisionTime": "2019-10-08T15:55:51Z",
-			"version": "feature/roles",
-			"versionExact": "feature/roles"
+			"version": "feature/integration",
+			"versionExact": "feature/integration"
 		},
 		{
 			"checksumSHA1": "2iG1OyYDGax71qsun0zBSdcFt4E=",
