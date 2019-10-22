@@ -74,6 +74,12 @@ func Provider() terraform.ResourceProvider {
 				DefaultFunc: envDefaultFuncWithDefault(kibana.EnvLogzMfaSecret, ""),
 				Description: "The logz.io MFA secret if the account has it enabled.",
 			},
+			"kibana_insecure": {
+				Type:        schema.TypeBool,
+				Default:     false,
+				Optional:    true,
+				Description: "Disable SSL verification",
+			},
 		},
 
 		DataSourcesMap: map[string]*schema.Resource{
@@ -127,6 +133,7 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 		KibanaBaseUri:     d.Get("kibana_uri").(string),
 		KibanaType:        kibana.ParseKibanaType(d.Get("kibana_type").(string)),
 		KibanaVersion:     d.Get("kibana_version").(string),
+		Insecure:          d.Get("kibana_insecure").(bool),
 	}
 
 	client := kibana.NewClient(config)
