@@ -187,21 +187,6 @@ func getSavedObjectsClientFromVersion(version string, kibanaClient *KibanaClient
 	return savedObjectsClient(kibanaClient)
 }
 
-var roleClientFromVersion = map[string]func(kibanaClient *KibanaClient) RoleClient{
-	DefaultKibanaVersion6: func(kibanaClient *KibanaClient) RoleClient {
-		return &DefaultRoleClient{config: kibanaClient.Config, client: kibanaClient.client}
-	},
-}
-
-func getRoleClientFromVersion(version string, kibanaClient *KibanaClient) RoleClient {
-	savedObjectsClient, ok := roleClientFromVersion[version]
-	if !ok {
-		savedObjectsClient = roleClientFromVersion[DefaultKibanaVersion6]
-	}
-
-	return savedObjectsClient(kibanaClient)
-}
-
 var spaceClientFromVersion = map[string]func(kibanaClient *KibanaClient) SpaceClient{
 	DefaultKibanaVersion7: func(kibanaClient *KibanaClient) SpaceClient {
 		return &DefaultSpaceClient{config: kibanaClient.Config, client: kibanaClient.client}
@@ -215,6 +200,21 @@ func getSpaceClientFromVersion(version string, kibanaClient *KibanaClient) Space
 	}
 
 	return spaceClient(kibanaClient)
+}
+
+var roleClientFromVersion = map[string]func(kibanaClient *KibanaClient) RoleClient{
+	DefaultKibanaVersion6: func(kibanaClient *KibanaClient) RoleClient {
+		return &DefaultRoleClient{config: kibanaClient.Config, client: kibanaClient.client}
+	},
+}
+
+func getRoleClientFromVersion(version string, kibanaClient *KibanaClient) RoleClient {
+	savedObjectsClient, ok := roleClientFromVersion[version]
+	if !ok {
+		savedObjectsClient = roleClientFromVersion[DefaultKibanaVersion6]
+	}
+
+	return savedObjectsClient(kibanaClient)
 }
 
 func NewDefaultConfig() *Config {
@@ -296,12 +296,12 @@ func (kibanaClient *KibanaClient) SavedObjects() SavedObjectsClient {
 	return getSavedObjectsClientFromVersion(kibanaClient.Config.KibanaVersion, kibanaClient)
 }
 
-func (kibanaClient *KibanaClient) Role() RoleClient {
-	return getRoleClientFromVersion(kibanaClient.Config.KibanaVersion, kibanaClient)
-}
-
 func (kibanaClient *KibanaClient) Space() SpaceClient {
 	return getSpaceClientFromVersion(kibanaClient.Config.KibanaVersion, kibanaClient)
+}
+
+func (kibanaClient *KibanaClient) Role() RoleClient {
+	return getRoleClientFromVersion(kibanaClient.Config.KibanaVersion, kibanaClient)
 }
 
 func (kibanaClient *KibanaClient) SetLogger(logger *log.Logger) *KibanaClient {
